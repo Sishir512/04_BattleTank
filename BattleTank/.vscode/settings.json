@@ -1,0 +1,10 @@
+{
+	"files.exclude": {
+		"D:/Programs/Repos/04_BattleTank/BattleTank/.vs": true,
+		"D:/Programs/Repos/04_BattleTank/BattleTank/.vscode": true,
+		"D:/Programs/Repos/04_BattleTank/BattleTank/Content": true,
+		"D:/Programs/Repos/04_BattleTank/BattleTank/DerivedDataCache": true,
+		"D:/Programs/Repos/04_BattleTank/BattleTank/Intermediate": true,
+		"D:/Programs/Repos/04_BattleTank/BattleTank/Saved": true
+	}
+}

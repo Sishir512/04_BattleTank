@@ -1,0 +1,23 @@
+[33mcommit 3d8b0a8e67b2252510438ed201847275c70f5ef1[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m
+Author: Sishir512 <sishir.wagle512@gmail.com>
+Date:   Sun May 31 14:56:24 2020 +0545
+
+    In this section the rotation flux of the screen has been fixed .
+
+[33mcommit a10f63dcd618d3b23b7030f3644176d2f238c576[m
+Author: Sishir512 <sishir.wagle512@gmail.com>
+Date:   Sun May 31 14:29:54 2020 +0545
+
+    In this section mouse is rotating the pawn but the rotation is not done correctly.
+
+[33mcommit 43c48fe600007756d393cb80185da54831f7a959[m[33m ([m[1;31mgithubRepo/master[m[33m)[m
+Author: Sishir512 <sishir.wagle512@gmail.com>
+Date:   Sat May 30 18:12:12 2020 +0545
+
+    This is the point where landscape has been drawn
+
+[33mcommit 5f060966c027dcfcd7e123dfb33a4fcbc7839719[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Sishir Wagle <35773743+Sishir512@users.noreply.github.com>
+Date:   Sat May 30 15:01:37 2020 +0545
+
+    Initial commit
