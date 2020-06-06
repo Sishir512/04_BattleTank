@@ -35,6 +35,10 @@ void ATank::AimAt(FVector HitLocation) {
 	
 }
 
+void ATank::Fire() {
+	auto Time = GetWorld()->GetTimeSeconds();
+	UE_LOG(LogTemp, Display, TEXT("%f Tank fires") , Time);
+}
 
 // Called to bind functionality to input
 void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
