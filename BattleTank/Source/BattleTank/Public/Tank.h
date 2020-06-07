@@ -28,13 +28,14 @@ public:
 	void AimAt(FVector HitLocation);
 
 	UFUNCTION(BluePrintCallable)
-		void Fire();
-
+	void Fire();
+	
 protected:
 	UTankAimingComponent* TankAimingComponent = nullptr;
 
 
 private:
+	
 	// Sets default values for this pawn's properties
 	ATank();
 
