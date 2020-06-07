@@ -41,17 +41,17 @@ void ATank::AimAt(FVector HitLocation) {
 
 void ATank::Fire() {
 	
+	bool isReloaded =(GetWorld()->GetTimeSeconds() - LastFireTime) > ReloadTimeInSeconds;
+	if (Barrel && isReloaded) {
 
-	if (!Barrel) {
-		UE_LOG(LogTemp, Display, TEXT("No local barrel found"));
-		return;
+		//else spawn a projectile at the socket location on the barrel
+		auto Projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileBluePrint,
+			Barrel->GetSocketLocation(FName("Projectile")),
+			Barrel->GetSocketRotation(FName("Projectile"))
+			);
+		Projectile->LaunchProjectile(LaunchSpeed);
+		LastFireTime = GetWorld()->GetTimeSeconds();
 	}
-	//else spawn a projectile at the socket location on the barrel
-	auto Projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileBluePrint,
-		Barrel->GetSocketLocation(FName("Projectile")),
-		Barrel->GetSocketRotation(FName("Projectile"))
-		);
-	Projectile->LaunchProjectile(LaunchSpeed);
 
 }
 
