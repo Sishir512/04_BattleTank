@@ -10,16 +10,15 @@ void UTankMovementComponent::Initialise(UTankTrack* LeftTrackToSet, UTankTrack* 
 }
 
 void UTankMovementComponent::RequestDirectMove(const FVector& MoveVelocity, bool bForceMaxSpeed) {
-	//No need to call super because we are replacing functionality
+	//Not necessary to call super because we are replacing the functionality.
 	auto TankForward = GetOwner()->GetActorForwardVector().GetSafeNormal();
 	auto AIForwardIntention = MoveVelocity.GetSafeNormal();
-	//UE_LOG(LogTemp , Warning , TEXT("%s vectoring to %s") , *TankName , *MoveVelocityString)
-	auto ForwardThrow = FVector::DotProduct(TankForward , AIForwardIntention);
-	//UE_LOG(LogTemp, Error, TEXT("Dot Product : %f"), ForwardThrow);
-	auto RightThrow = FVector::CrossProduct(TankForward , AIForwardIntention).Z;
+	auto ForwardThrow = FVector::DotProduct(TankForward, AIForwardIntention);
+	//UE_LOG(LogTemp, Error, TEXT("Dot = %f"), ForwardThrow);
 	IntendMoveForward(ForwardThrow);
+	//UE_LOG(LogTemp, Warning, TEXT("%s vectoring to %s") , *TankName , *MoveVelocityString);
+	auto RightThrow = FVector::CrossProduct(TankForward, AIForwardIntention).Z;
 	IntendTurnRight(RightThrow);
-
 }
 
 void UTankMovementComponent::IntendMoveForward(float Throw) {
@@ -37,10 +36,3 @@ void UTankMovementComponent::IntendTurnRight(float Throw) {
 
 }
 
-void UTankMovementComponent::IntendTurnLeft(float Throw) {
-	if (!LeftTrack || !RightTrack) { return; }
-	LeftTrack->SetThrottle(-Throw);
-	RightTrack->SetThrottle(Throw);
-	//TODO prevent double speed due to double speed
-
-}
