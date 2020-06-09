@@ -14,7 +14,13 @@ ATank::ATank()
 	//TankAimingComponent = CreateDefaultSubobject<UTankAimingComponent>(FName("Aiming Component"));
 	auto TankName = GetName();
 	UE_LOG(LogTemp, Warning, TEXT("%s : Donkey Tank C++ construct") , *TankName);
+	
 
+}
+
+void ATank::BeginPlay() {
+	Super::BeginPlay();
+	TankAimingComponent = FindComponentByClass<UTankAimingComponent>();
 }
 
 
@@ -26,6 +32,7 @@ ATank::ATank()
 void ATank::AimAt(FVector HitLocation) {
 	if (!ensure(TankAimingComponent)) { return; }
 	TankAimingComponent->AimAt(HitLocation , LaunchSpeed);
+	UE_LOG(LogTemp, Warning, TEXT("Aim at is working"));
 	
 }
 

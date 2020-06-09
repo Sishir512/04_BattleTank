@@ -54,11 +54,13 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed) {
 		auto Time = GetWorld()->GetTimeSeconds();
 		//UE_LOG(LogTemp, Warning, TEXT("%f : No aiming component found"), Time);
 	}
+	
 }
 
 void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection) {
-	if (!Barrel || !Turret) { return; }
+	if (!ensure(Barrel) || !ensure(Turret)) { return; }
 	//Work out difference between current barrel rotation and AimDirection
+	UE_LOG(LogTemp, Warning, TEXT("2nd Aim At working"));
 	auto BarrelRotator = Barrel->GetForwardVector().Rotation();
 	//auto BarrelRotator = Barrel->GetRelativeRotation(); we can use this as well
 	auto AimAsRotator = AimDirection.Rotation();
@@ -66,7 +68,7 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection) {
 	//UE_LOG(LogTemp, Warning, TEXT("AimAsRotator : %s") , *AimAsRotator.ToString());
 
 	Barrel->Elevate(DeltaRotator.Pitch);
-	Turret->Rotate(-DeltaRotator.Yaw);
+	Turret->Rotate(DeltaRotator.Yaw);
 	
 
 }
