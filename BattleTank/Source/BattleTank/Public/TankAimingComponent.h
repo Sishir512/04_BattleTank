@@ -6,6 +6,7 @@
 #include "Components/ActorComponent.h"
 #include "TankAimingComponent.generated.h"
 
+
 UENUM()
 enum class EFiringState : uint8 {
 	Reloading , 
@@ -15,6 +16,8 @@ enum class EFiringState : uint8 {
 
 class UTankBarrel; //Forward Declaration
 class UTankTurret;
+class AProjectile;
+
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class BATTLETANK_API UTankAimingComponent : public UActorComponent
 {
@@ -26,7 +29,9 @@ public:
 	UFUNCTION(BlueprintCallable , Category = "Setup")
 	void Initialise(UTankBarrel* BarrelToSet , UTankTurret* TurretToSet );
 
-	void AimAt(FVector HitLocation , float LaunchSpeed);
+	void AimAt(FVector HitLocation );
+	UFUNCTION(BluePrintCallable)
+	void Fire();
 
 protected: 
 	UPROPERTY(BlueprintReadOnly)
@@ -35,7 +40,15 @@ private:
 	UTankBarrel* Barrel = nullptr;
 	UTankTurret* Turret = nullptr;
 	void MoveBarrelTowards(FVector AimDirection);
+	UPROPERTY(EditAnywhere, Category = Firing)
+	float LaunchSpeed = 4000.f;
+	
 
+	UPROPERTY(EditAnywhere, Category = Setup)
+	TSubclassOf<AProjectile> ProjectileBluePrint;
+	float ReloadTimeInSeconds = 3;
+	float LastFireTime = 0;
 	
-	
+
+
 };
