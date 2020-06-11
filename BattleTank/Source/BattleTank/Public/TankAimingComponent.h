@@ -11,7 +11,8 @@ UENUM()
 enum class EFiringState : uint8 {
 	Reloading , 
 	Aiming , 
-	Locked
+	Locked , 
+	OutOfAmmo
 };
 
 class UTankBarrel; //Forward Declaration
@@ -32,14 +33,20 @@ public:
 	void Initialise(UTankBarrel* BarrelToSet , UTankTurret* TurretToSet );
 
 	void AimAt(FVector HitLocation );
-	UFUNCTION(BluePrintCallable)
+	UFUNCTION(BlueprintCallable)
 	void Fire();
 
 	EFiringState GetFiringState() const;
+	
+	UFUNCTION(BlueprintCallable)
+		int GetRoundsLeft() const;
 
 protected: 
 	UPROPERTY(BlueprintReadOnly)
 	EFiringState FiringState = EFiringState::Reloading;
+
+	
+
 private:
 
 	virtual void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
@@ -48,7 +55,7 @@ private:
 	UTankTurret* Turret = nullptr;
 	void MoveBarrelTowards(FVector AimingDirection);
 	UPROPERTY(EditAnywhere, Category = Firing)
-	float LaunchSpeed = 4000.f;
+	float LaunchSpeed = 10000.f;
 	
 	FVector AimDirection;
 
@@ -58,6 +65,8 @@ private:
 	float LastFireTime = 0;
 	
 	bool IsBarrelMoving();
+
+	int RoundsLeft = 3;
 
 
 };

@@ -22,16 +22,23 @@ void UTankAimingComponent::BeginPlay() {
 
 void UTankAimingComponent::TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) {
 	//Set the logic for tank aiming component aiming or not aiming in TickComponent because we need to check it every frame
-	if ((GetWorld()->GetTimeSeconds() - LastFireTime) < ReloadTimeInSeconds){
+	if (RoundsLeft == 0) {
+	FiringState = EFiringState::OutOfAmmo;
+	}
+	else if ((GetWorld()->GetTimeSeconds() - LastFireTime) < ReloadTimeInSeconds){
 		FiringState = EFiringState::Reloading; //Red
 	}
 	else if (IsBarrelMoving()) {
 		FiringState = EFiringState::Aiming; //Yellow
 	}
+	
 	else {
 		FiringState = EFiringState::Locked;  //Grren
 	}
 
+}
+int UTankAimingComponent::GetRoundsLeft() const {
+	return RoundsLeft;
 }
 void UTankAimingComponent::Initialise(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet) {
 	Barrel = BarrelToSet;
@@ -110,7 +117,7 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimingDirection) {
 void UTankAimingComponent::Fire() {
 	
 	
-	if (FiringState!=EFiringState::Reloading) {
+	if (FiringState==EFiringState::Aiming || FiringState == EFiringState::Locked) {
 
 		if (!ensure(Barrel && ProjectileBluePrint)) {
 			UE_LOG(LogTemp, Warning, TEXT("ProjectileBluePrint or Barrel not found"));
@@ -124,7 +131,9 @@ void UTankAimingComponent::Fire() {
 			);
 		Projectile->LaunchProjectile(LaunchSpeed);
 		LastFireTime = GetWorld()->GetTimeSeconds();
+		RoundsLeft--;
 	}
+	
 
 }
 
