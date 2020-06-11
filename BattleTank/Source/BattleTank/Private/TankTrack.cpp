@@ -53,5 +53,5 @@ void UTankTrack::DriveTrack() {
 	auto ForceLocation = GetComponentLocation();
 	auto TankRoot = Cast<UPrimitiveComponent>(GetOwner()->GetRootComponent());  //because staticmeshcomponent's parent class is primitivecomponent and force can only be applied to primitivecomponent
 	TankRoot->AddForceAtLocation(ForceApplied, ForceLocation);
-	UE_LOG(LogTemp, Error, TEXT("Track Driving"));
+	//UE_LOG(LogTemp, Error, TEXT("Track Driving"));
 }

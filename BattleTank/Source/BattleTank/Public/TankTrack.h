@@ -18,7 +18,7 @@ public:
 	void SetThrottle(float Throttle);
 	//Max force per track in newton
 	UPROPERTY(EditDefaultsOnly)
-	float TrackMaxDrivingForce = 1000000;
+	float TrackMaxDrivingForce = 1600000;
 	
 	UTankTrack();
 	
