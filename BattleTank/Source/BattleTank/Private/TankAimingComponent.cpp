@@ -89,7 +89,7 @@ void UTankAimingComponent::AimAt(FVector HitLocation) {
 void UTankAimingComponent::MoveBarrelTowards(FVector AimingDirection) {
 	if (!ensure(Barrel) || !ensure(Turret)) { return; }
 	//Work out difference between current barrel rotation and AimDirection
-	UE_LOG(LogTemp, Warning, TEXT("2nd Aim At working"));
+	
 	auto BarrelRotator = Barrel->GetForwardVector().Rotation();
 	//auto BarrelRotator = Barrel->GetRelativeRotation(); we can use this as well
 	auto AimAsRotator = AimingDirection.Rotation();
