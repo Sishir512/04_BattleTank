@@ -9,7 +9,7 @@ void ATankPlayerController::BeginPlay() {
 	Super::BeginPlay();
 	auto AimingComponent = GetPawn()->FindComponentByClass<UTankAimingComponent>();
 	if (!ensure(AimingComponent)) { return; }
-	FoundAimingComponent(AimingComponent);
+	FoundAimingComponent(AimingComponent);  //Dont forget to make blueprint variable public
 	
 
 	/*auto ControlledTank = GetControlledTank();
