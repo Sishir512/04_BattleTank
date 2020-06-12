@@ -39,7 +39,7 @@ public:
 	EFiringState GetFiringState() const;
 	
 	UFUNCTION(BlueprintCallable)
-		int GetRoundsLeft() const;
+	int32 GetRoundsLeft() const;
 
 protected: 
 	UPROPERTY(BlueprintReadOnly)
@@ -61,12 +61,15 @@ private:
 
 	UPROPERTY(EditAnywhere, Category = Setup)
 	TSubclassOf<AProjectile> ProjectileBluePrint;
+	UPROPERTY(EditDefaultsOnly , Category = "Firing")
 	float ReloadTimeInSeconds = 3;
+
+	
 	float LastFireTime = 0;
 	
 	bool IsBarrelMoving();
-
-	int RoundsLeft = 3;
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
+	int32 RoundsLeft = 10;
 
 
 };
