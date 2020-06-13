@@ -1,6 +1,6 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-
+#include "Tank.h"
 #include "TankAimingComponent.h"
 #include "Engine/World.h"
 #include "TankPlayerController.h"
@@ -19,6 +19,9 @@ void ATankPlayerController::BeginPlay() {
 	else {
 		UE_LOG(LogTemp, Warning, TEXT("Player Controller possessing %s"), *(ControlledTank->GetName()));
 	}*/
+
+	auto PossessedTank = Cast<ATank>(GetPawn());
+	PossessedTank->OnDeath.AddDynamic(this, &ATankPlayerController::OnTankDeath);
 }
 
 void ATankPlayerController::Tick(float DeltaTime)
@@ -86,4 +89,8 @@ bool ATankPlayerController::GetLookVectorHitDirection(FVector LookDirection , FV
 bool ATankPlayerController::GetLookDirection(FVector2D ScreenLocation, FVector& LookDirection) const {
 	FVector CameraWorldLocation;    //Discard but nececessary
 	return DeprojectScreenPositionToWorld(ScreenLocation.X, ScreenLocation.Y, CameraWorldLocation, LookDirection); //Because it returns true if direction is found
+}
+
+void ATankPlayerController::OnTankDeath() {
+	StartSpectatingOnly();
 }

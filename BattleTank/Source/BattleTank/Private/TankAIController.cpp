@@ -1,9 +1,21 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 #include "TankAimingComponent.h"
+#include "Tank.h"
 #include "TankAIController.h"
 
 void ATankAIController::BeginPlay() {
 	Super::BeginPlay();
+}
+
+void ATankAIController::SetPawn(APawn* InPawn) {
+	Super::SetPawn(InPawn);
+	if (InPawn) {
+		auto PossessedTank = Cast<ATank>(InPawn);
+		if (!ensure(PossessedTank)) { return; }
+
+		PossessedTank->OnDeath.AddUniqueDynamic(this, &ATankAIController::OnTankDeath);
+
+	}
 }
 
 
@@ -22,11 +34,12 @@ void ATankAIController::Tick(float DeltaTime)
 	if (AimingComponent->GetFiringState() == EFiringState::Locked) {
 		AimingComponent->Fire();
 	}
-	
-	
-	
-	
-	
+		
 
 }
 
+void ATankAIController::OnTankDeath() {
+	UE_LOG(LogTemp, Warning, TEXT("Recieved : AI"));
+	if (!GetPawn()) {return;}
+	GetPawn()->DetachFromControllerPendingDestroy();
+}

@@ -39,4 +39,7 @@ private:
 	float LineTraceRange = 1000000.f;
 	bool GetLookDirection(FVector2D ScreenLocation, FVector& WorldDirection) const;
 	bool GetLookVectorHitDirection(FVector LookDirection, FVector& HitLocation) const;
+
+	UFUNCTION()
+	void OnTankDeath();
 };

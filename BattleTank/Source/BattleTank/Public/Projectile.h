@@ -32,6 +32,9 @@ public:
 private:
 	UProjectileMovementComponent* ProjectileMovement = nullptr;
 
+	UPROPERTY(EditDefaultsOnly, Category = "Setup")
+	float ProjectileDamage = 50;
+
 	UPROPERTY(VisibleAnywhere , Category = "Components")
 	UStaticMeshComponent* CollisionMesh = nullptr;
 

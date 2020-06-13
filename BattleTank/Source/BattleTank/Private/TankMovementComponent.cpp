@@ -19,7 +19,7 @@ void UTankMovementComponent::RequestDirectMove(const FVector& MoveVelocity, bool
 	//UE_LOG(LogTemp, Warning, TEXT("%s vectoring to %s") , *TankName , *MoveVelocityString);
 	auto RightThrow = FVector::CrossProduct(TankForward, AIForwardIntention).Z;
 	IntendTurnRight(RightThrow);
-	UE_LOG(LogTemp, Error, TEXT("Move to actor called"));
+	
 }
 
 void UTankMovementComponent::IntendMoveForward(float Throw) {
