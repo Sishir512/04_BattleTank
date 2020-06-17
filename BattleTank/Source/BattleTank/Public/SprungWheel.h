@@ -26,6 +26,11 @@ protected:
 public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+
+	void AddDrivingForce(float Magnitude);
+
+	
+
 private:
 	/*UPROPERTY(VisibleAnywhere, Category = "Components")
 	UStaticMeshComponent* Mass = nullptr;*/
@@ -44,4 +49,10 @@ private:
 
 	void SetupConstraint();
 
+	UFUNCTION()
+	void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit);
+
+	void ApplyForce();
+
+	float MagnitudeThisFrame = 0;
 };
